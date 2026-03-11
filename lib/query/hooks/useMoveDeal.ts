@@ -137,6 +137,13 @@ export const useMoveDeal = () => {
       }
       // #endregion
 
+      // SmartZap: trigger automation fire-and-forget (don't block UI)
+      fetch('/api/integrations/smartzap/trigger', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ dealId, stageId: targetStageId }),
+      }).catch(() => {});
+
       // 2. Create activity "Moveu para X" (fire and forget - don't block UI)
       const stageLabel = targetStage?.label || targetStageId;
       activitiesService.create({
