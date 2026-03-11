@@ -17,7 +17,7 @@ export class SmartZapClient {
   }
 
   async getTemplates(): Promise<SmartZapTemplate[]> {
-    const res = await fetch(`${this.baseUrl}/templates`, {
+    const res = await fetch(`${this.baseUrl}/api/templates`, {
       method: 'GET',
       headers: this.headers(),
     });
@@ -42,7 +42,7 @@ export class SmartZapClient {
   }
 
   async dispatch(payload: SmartZapCampaignPayload): Promise<{ status: number; body: unknown }> {
-    const res = await fetch(`${this.baseUrl}/campaigns`, {
+    const res = await fetch(`${this.baseUrl}/api/campaigns`, {
       method: 'POST',
       headers: this.headers(),
       body: JSON.stringify(payload),
